@@ -1,0 +1,16 @@
+{
+  "name": "vigia",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "libs/*"
+  ],
+  "scripts": {
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
+  },
+  "devDependencies": {
+    "drizzle-kit": "0.31.11",
+    "nx": "24.0.6"
+  }
+}
