@@ -1,0 +1,60 @@
+.dashboard-container {
+  height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  border-right: none;
+}
+
+.sidebar-header {
+  padding: 0 16px;
+  height: 64px;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.top-header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.user-info mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.dashboard-body {
+  padding: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard-body h1 {
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+}
+
+.dashboard-body p {
+  font-size: 16px;
+  color: var(--mat-sys-on-surface-variant);
+  margin: 0;
+}

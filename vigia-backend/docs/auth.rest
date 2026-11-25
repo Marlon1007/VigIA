@@ -1,0 +1,38 @@
+### Login con email y contraseña
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@vigia.com",
+  "password": "123456"
+}
+
+### Login con sesión (Passport local)
+POST http://localhost:3001/auth/login/session
+Content-Type: application/json
+
+{
+  "email": "admin@vigia.com",
+  "password": "123456"
+}
+
+### Obtener perfil del usuario autenticado
+# Primero copia el access_token del login y pégalo abajo
+GET http://localhost:3001/auth/profile
+Authorization: Bearer <ACCESS_TOKEN>
+
+### Crear usuario (devuelve accessToken y usuario para iniciar sesión)
+POST http://localhost:3001/auth/register
+Content-Type: application/json
+
+{
+  "name": "Operador VigIA",
+  "email": "operador@vigia.com",
+  "password": "ClaveSegura123"
+}
+
+### Comprobar en PostgreSQL que el registro se persistió (no consultar password_hash)
+# Ejecutar en pgAdmin Query Tool sobre la misma base configurada en vigia-backend/.env:
+# SELECT id, name, email, role, is_active, created_at
+# FROM public.users
+# WHERE email = 'operador@vigia.com';

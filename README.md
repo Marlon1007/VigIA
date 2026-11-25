@@ -1,6 +1,6 @@
 # vigIA
 
-Monorepo Nx con npm workspaces. La aplicación NestJS está en `apps/api`.
+Monorepo Nx con npm workspaces. El esquema de PostgreSQL y las migraciones están en `apps/api`. El backend de autenticación conectado al frontend está en `vigia-backend` y escucha en el puerto `3001`.
 
 ## Inicio local
 
@@ -36,3 +36,13 @@ Puedes verificar las restricciones, las categorías iniciales y las vistas en un
 ```bash
 docker compose exec -T db psql -X -v ON_ERROR_STOP=1 -U vigia -d vigia < apps/api/test/database.test.sql
 ```
+
+### Backend y PostgreSQL local existente
+
+El backend de autenticación carga la conexión desde `vigia-backend/.env`. Para aplicar allí el esquema canónico de `apps/api/drizzle`, ejecuta desde `vigia-backend`:
+
+```bash
+npm run db:migrate
+```
+
+El comando valida la conexión, aplica las migraciones pendientes y comprueba las 12 tablas y 3 vistas principales. La API de autenticación se inicia con `npm run start:dev` y el frontend usa `http://localhost:3001`.

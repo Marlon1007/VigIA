@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" class="top-header">
+  <span>VigIA Dashboard</span>
+  <span class="spacer"></span>
+  <div class="user-info">
+    <mat-icon>account_circle</mat-icon>
+    <span>{{ user?.name }}</span>
+  </div>
+  <button mat-icon-button (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="dashboard-body">
+  <h1>Bienvenido, {{ user?.name }}</h1>
+  <p>Rol: {{ user?.role }}</p>
+</div>

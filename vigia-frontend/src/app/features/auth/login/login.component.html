@@ -1,0 +1,50 @@
+<main class="auth-shell">
+  <section class="auth-panel" aria-label="Acceso a VigIA">
+    <div class="brand-side">
+      <div class="brand-mark"><mat-icon>visibility</mat-icon></div>
+      <span class="eyebrow">VIGILANCIA INTELIGENTE</span>
+      <h1>VigIA</h1>
+      <p>Información clara para decisiones seguras.</p>
+      <div class="brand-note"><mat-icon>verified_user</mat-icon><span>Plataforma de monitoreo y análisis</span></div>
+    </div>
+
+    <div class="form-side">
+      <div class="mobile-brand"><span class="brand-mark"><mat-icon>visibility</mat-icon></span><strong>VigIA</strong></div>
+      <span class="eyebrow">{{ isRegistering() ? 'NUEVA CUENTA' : 'BIENVENIDO DE NUEVO' }}</span>
+      <h2>{{ isRegistering() ? 'Crea tu cuenta' : 'Inicia sesión' }}</h2>
+      <p class="form-intro">{{ isRegistering() ? 'Completa tus datos para comenzar.' : 'Ingresa tus datos para continuar.' }}</p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        @if (isRegistering()) {
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nombre completo</mat-label>
+            <input matInput formControlName="name" autocomplete="name" />
+            @if (loginForm.get('name')?.invalid && loginForm.get('name')?.touched) { <mat-error>{{ nameError }}</mat-error> }
+          </mat-form-field>
+        }
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo electrónico</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="nombre@empresa.com" autocomplete="email" />
+          @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) { <mat-error>{{ emailError }}</mat-error> }
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input matInput [type]="hidePassword() ? 'password' : 'text'" formControlName="password" autocomplete="{{ isRegistering() ? 'new-password' : 'current-password' }}" />
+          <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()" [attr.aria-label]="hidePassword() ? 'Mostrar contraseña' : 'Ocultar contraseña'"><mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon></button>
+          @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) { <mat-error>{{ passwordError }}</mat-error> }
+        </mat-form-field>
+        @if (errorMessage()) {
+          <div class="error-alert" role="alert"><mat-icon>error_outline</mat-icon><span>{{ errorMessage() }}</span></div>
+        }
+        <button mat-flat-button type="submit" class="submit-button" [disabled]="isLoading() || loginForm.invalid">
+          {{ isLoading() ? 'Procesando…' : (isRegistering() ? 'Crear cuenta' : 'Iniciar sesión') }}
+          @if (!isLoading()) { <mat-icon iconPositionEnd>arrow_forward</mat-icon> }
+        </button>
+      </form>
+      <p class="switch-mode">{{ isRegistering() ? '¿Ya tienes una cuenta?' : '¿Primera vez en VigIA?' }}
+        <button mat-button type="button" (click)="toggleMode()">{{ isRegistering() ? 'Inicia sesión' : 'Crear cuenta' }}</button>
+      </p>
+      <div class="secure-note"><mat-icon>lock</mat-icon><span>Conexión segura · Tus datos están protegidos</span></div>
+    </div>
+  </section>
+</main>
